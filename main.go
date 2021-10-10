@@ -2,27 +2,33 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+
 	_ "github.com/practical-coder/booknotes/db"
 	"github.com/practical-coder/booknotes/handlers/notes"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	router := gin.Default()
+	engine := SetEngine()
+	engine.Run()
+}
+
+func SetEngine() *gin.Engine {
+	e := gin.Default()
 	// Notes
-	router.POST("/notes", notes.Create)
-	router.GET("/notes", notes.List)
-	router.GET("/notes/:uuid", notes.Show)
-	router.PUT("/notes/:uuid", notes.Update)
-	router.DELETE("/notes/:uuid", notes.Delete)
-	router.GET("/notes/search", notes.Search)
+	e.POST("/notes", notes.Create)
+	e.GET("/notes", notes.List)
+	e.GET("/notes/:uuid", notes.Show)
+	e.PUT("/notes/:uuid", notes.Update)
+	e.DELETE("/notes/:uuid", notes.Delete)
+	e.GET("/notes/search", notes.Search)
 
 	// hello
-	router.GET("/:directory", helloHandler)
+	e.GET("/:directory", helloHandler)
 
-	router.Run()
+	return e
 }
 
 func helloHandler(c *gin.Context) {
