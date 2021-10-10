@@ -1,2 +1,3 @@
 # booknotes
-BookNotes api to manage notes about books using MongoDB
+BookNotes is an api to manage notes about books.  
+Using Gin framework and MongoDB as a storage.
