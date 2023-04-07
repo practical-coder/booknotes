@@ -1,0 +1,13 @@
+image:
+  name: mongo:latest
+
+
+services:
+  - mongo:latest
+
+db-job:
+  script:
+    - mongorestore --host=mongo --port=27017 --db=booknotes --archive=/mnt/booknotes-2023-04-07.bson
+    - mongosh --quiet mongodb://mongo:27017/ --eval 'show dbs'
+    - mongosh --quiet mongodb://mongo:27017/booknotes --eval 'show collections'
+    - mongosh --quiet mongodb://mongo:27017/booknotes --eval 'printjson(db.notes.find().pretty().shellPrint)'
