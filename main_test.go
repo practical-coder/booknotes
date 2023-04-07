@@ -26,7 +26,7 @@ func TestList(t *testing.T) {
 	e.ServeHTTP(w, req)
 
 	var notes []book.Note
-	json.Unmarshal([]byte(w.Body.String()), &notes)
+	json.Unmarshal(w.Body.Bytes(), &notes)
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Greater(t, len(notes), 0)
@@ -50,7 +50,7 @@ func TestCreateDelete(t *testing.T) {
 	e.ServeHTTP(w, req)
 
 	var respNote book.Note
-	json.Unmarshal([]byte(w.Body.String()), &respNote)
+	json.Unmarshal(w.Body.Bytes(), &respNote)
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, note.Title, respNote.Title)

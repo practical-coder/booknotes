@@ -50,7 +50,7 @@ func Show(c *gin.Context) {
 	defer cancel()
 
 	uuid := c.Params.ByName("uuid")
-	filter := bson.D{{"uuid", uuid}}
+	filter := bson.D{{Key: "uuid", Value: uuid}}
 
 	note, err := book.FindNote(ctx, filter)
 	if err != nil {
@@ -65,7 +65,7 @@ func Show(c *gin.Context) {
 
 func Update(c *gin.Context) {
 	uuid := c.Params.ByName("uuid")
-	filter := bson.D{{"uuid", uuid}}
+	filter := bson.D{{Key: "uuid", Value: uuid}}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -103,7 +103,7 @@ func Update(c *gin.Context) {
 
 func Delete(c *gin.Context) {
 	uuid := c.Params.ByName("uuid")
-	filter := bson.D{{"uuid", uuid}}
+	filter := bson.D{{Key: "uuid", Value: uuid}}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
@@ -120,7 +120,7 @@ func Delete(c *gin.Context) {
 
 func Search(c *gin.Context) {
 	tag := c.Query("tag")
-	filter := bson.D{{"tag", tag}}
+	filter := bson.D{{Key: "tag", Value: tag}}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

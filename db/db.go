@@ -1,8 +1,8 @@
 package db
 
 import (
-	"github.com/practical-coder/booknotes/zlg"
 	"context"
+	"github.com/practical-coder/booknotes/zlg"
 	"os"
 	"sync"
 

@@ -142,7 +142,7 @@ func DeleteNote(ctx context.Context, filter bson.D) (*mongo.DeleteResult, error)
 }
 
 func UpdateNote(ctx context.Context, filter bson.D, note *Note) (*mongo.UpdateResult, error) {
-	result, err := notes().UpdateOne(ctx, filter, bson.D{{"$set", note}})
+	result, err := notes().UpdateOne(ctx, filter, bson.D{{Key: "$set", Value: note}})
 	if err != nil {
 		zlg.Logger.Error().
 			Err(err).
